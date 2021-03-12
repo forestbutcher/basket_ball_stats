@@ -1,7 +1,4 @@
 import constants
-import ast
-import pdb
-import math
 import sys
 
 teams = constants.TEAMS
@@ -15,25 +12,30 @@ Panthers = []
 Bandits = []
 Worriers = []
 
+def print_hello():
+    print("hello")
+
 def clean_data():
     for player in players:
         height = player["height"].split()
         player["height"] = int(height[0])
-        #saw Christopher Spagnesi post on slack for the int conversion
+#saw Christopher Spagnesi post on slack for the int conversion
         if player["experience"] == "YES":
             player["experience"] = True
             is_experienced.append(player)
         if player["experience"] == "NO":
             player["experience"] = False
             not_experienced.append(player)
-            #looked on gdchoices43 github for help on experience on nonexperience 
-            
+#looked on gdchoices43 github for help on experience on nonexperience
+
+
 def team_balance():
-    teams [0] = is_experienced[:3] + not_experienced[:3]
-    teams [1] = is_experienced[3:6] + not_experienced[3:6]
-    teams [2] = is_experienced[6:9] + not_experienced[6:9]
+    teams[0] = is_experienced[:3] + not_experienced[:3]
+    teams[1] = is_experienced[3:6] + not_experienced[3:6]
+    teams[2] = is_experienced[6:9] + not_experienced[6:9]
     #looked on gdchoices43 github for help on experience on team_balance
-    
+
+
 def home_screen():
     print("*" * 82)
     print(":^..^_('')_{**}_^..^_('')_{**}_^..^_('')_{**}_^..^_('')_{**}_^..^_('')_{**}_^..^:\n"
@@ -43,14 +45,16 @@ def home_screen():
     print("\n \n  \n:^..^_Panthers_^..^: --> A\n \n"
           ":('')_Bandits_(''): -->  B\n \n"
           ":{**}_Worriers_{**}: --> C    ")
-
-
+    
+print(__name__)
+if __name__ == '__main__':
+    print_hello()
 clean_data()
 team_balance()
 
 while True:
     print("*" * 82)
-    print("   Welcom to B Ball Stats where you can view your favorite players statistics!\n"
+    print("   Welcome to B Ball Stats where you can view your favorite players statistics!\n"
               "______________________________Do you want to proceed?_____________________________")
     proceed = input("                                        Y/N  ")
     print("*" * 82)
@@ -69,22 +73,22 @@ while True:
 while True:
     home_screen()
     choose = input("\npick a team:  ")
-    
+
     while True:
         try:
             if choose.lower() == "exit":
                 print("\nBYE\n")
                 sys.exit()
-                
+
             if choose.upper() == "A":
-                Panthers = teams [0]
+                Panthers = teams[0]
                 team1 = []
                 team1_guardians = []
                 team1_height = []
                 height = [player["height"] for player in Panthers]
                 average_height_team1 = round(sum(height) / len(Panthers), 1)
                 average_height_team1 = float(average_height_team1)
-                exp_player =  [player["experience"] for player in Panthers if player["experience"] == True]
+                exp_player = [player["experience"] for player in Panthers if player["experience"] == True]
                 exp_player = int(len(exp_player))
                 not_exp_player = [player["experience"] for player in Panthers if player["experience"] == False]
                 not_exp_player = int(len(not_exp_player))
@@ -93,9 +97,9 @@ while True:
                 print("\nThere are {} Panthers on the team".format(num_players))
                 print("The Panthers average height is {}".format(average_height_team1))
                 print("There are {} experienced Panthers".format(exp_player))
-                print("There are {} non experienced Panthers".format(exp_player)) 
+                print("There are {} non experienced Panthers".format(exp_player))
                 print("\n :^..^_Player Stats!_^..^:")
-                Panthers = teams [0]
+                Panthers = teams[0]
                 team1 = []
                 team1_guardians = []
                 team1_height = []
@@ -104,7 +108,7 @@ while True:
                     team1.append(str(name))
                 print("\nPlayers Names:")
                 print(", ".join(team1))
-                #looked on gdchoices43 github to learn how to print the strings 
+                #looked on gdchoices43 github to learn how to print the strings
                 for player in Panthers:
                     guardians = player["guardians"]
                     team1_guardians.append(str(guardians))
@@ -126,18 +130,18 @@ while True:
                     sys.exit()
                 if more_stats.upper() != "N":
                     print("\nNot a valid choice. Pick again.\n")
-                    break 
+                    break
                     home_screen()
-                
+
             elif choose.upper() == "B":
-                Bandits = teams [1]
+                Bandits = teams[1]
                 team2 = []
                 team2_guardians = []
                 team2_height = []
                 height = [player["height"] for player in Bandits]
                 average_height_team1 = round(sum(height) / len(Bandits), 1)
                 average_height_team1 = float(average_height_team1)
-                exp_player =  [player["experience"] for player in Bandits if player["experience"] == True]
+                exp_player = [player["experience"] for player in Bandits if player["experience"] == True]
                 exp_player = int(len(exp_player))
                 not_exp_player = [player["experience"] for player in Bandits if player["experience"] == False]
                 not_exp_player = int(len(not_exp_player))
@@ -146,7 +150,7 @@ while True:
                 print("\nThere are {} Bandits on the team".format(num_players))
                 print("The Bandits average height is {}".format(average_height_team1))
                 print("There are {} experienced Bandits".format(exp_player))
-                print("There are {} non experienced Bandits".format(exp_player)) 
+                print("There are {} non experienced Bandits".format(exp_player))
                 print("\n :('')_Player Stats!_(''):")
                 for player in Bandits:
                     name = player["name"]
@@ -173,39 +177,39 @@ while True:
                     sys.exit()
                 if (more_stats.upper() != "N") or (more_stats.upper() != "Y"):
                     print("\nNot a valid choice. Pick again.\n")
-                    break 
+                    break
                     home_screen()
-                    
+
             elif choose.upper() == "C":
-                Worriers = teams [2]
+                Worriers = teams[2]
                 team3 = []
                 team3_guardians = []
                 team3_height = []
                 height = [player["height"] for player in Worriers]
                 average_height_team1 = round(sum(height) / len(Worriers), 1)
                 average_height_team1 = float(average_height_team1)
-                exp_player =  [player["experience"] for player in  Worriers if player["experience"] == True]
+                exp_player = [player["experience"] for player in Worriers if player["experience"] == True]
                 exp_player = int(len(exp_player))
-                not_exp_player = [player["experience"] for player in  Worriers if player["experience"] == False]
+                not_exp_player = [player["experience"] for player in Worriers if player["experience"] == False]
                 not_exp_player = int(len(not_exp_player))
                 #looked on gdchoices43 github to clear up how to average and experience vs non
                 print("\n \n:{**}_ Worriers Stats!_{**}:")
                 print("\nThere are {}  Worriers on the team".format(num_players))
                 print("The Worriers average height is {}".format(average_height_team1))
                 print("There are {} experienced  Worriers".format(exp_player))
-                print("There are {} non experienced  Worriers".format(exp_player)) 
+                print("There are {} non experienced  Worriers".format(exp_player))
                 print("\n :{**}_Player Stats!_{**}:")
-                for player in  Worriers:
+                for player in Worriers:
                     name = player["name"]
                     team3.append(str(name))
                 print("\nPlayers Names:")
                 print(", ".join(team3))
-                for player in  Worriers:
+                for player in Worriers:
                     guardians = player["guardians"]
                     team3_guardians.append(str(guardians))
                 print("\nPlayers Guardians:")
                 print(", ".join(team3_guardians))
-                for player in  Worriers:
+                for player in Worriers:
                     height = player["height"]
                     team3_height.append(str(height))
                 print("\nHieght in inches:")
@@ -220,9 +224,9 @@ while True:
                     sys.exit()
                 if (more_stats.upper() != "N") or (more_stats.upper() != "Y"):
                     print("\nNot a valid choice. Pick again.\n")
-                    break 
+                    break
                     home_screen()
-                
+
                 elif (choose.upper() != "A") or (choose.upper() != "B") or (choose.upper() != "C"):
                     print("\nNot a valid selection")
                     break
@@ -233,22 +237,8 @@ while True:
             print("\n{} \n".format(err))
             break
             home_screen()
-                    
-
-if __name__=='__main__':
-    print(players [0])  
+            
+if __name__ == '__main__':
+    print_hello()
+    
                 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
