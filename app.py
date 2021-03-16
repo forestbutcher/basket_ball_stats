@@ -34,10 +34,6 @@ def team_balance():
     teams[2] = is_experienced[6:9] + not_experienced[6:9]
     # looked on gdchoices43 github for help on experience on team_balance
 
-def hello ():
-    print("hello")
-
-print("__name__")
 clean_data()
 team_balance()
 
@@ -214,4 +210,5 @@ while True:
 
 
 if __name__ == '__main__':
-    hello()
+    clean_data()
+    team_balance()
