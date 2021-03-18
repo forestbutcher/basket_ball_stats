@@ -11,13 +11,16 @@ not_experienced = []
 is_experienced = []
 Panthers = []
 Bandits = []
-Worriers = []
+Warriors = []
 
 
 def clean_data():
     for player in players:
         height = player["height"].split()
         player["height"] = int(height[0])
+        player['guardians'] = str(player["guardians"])
+        player['guardians'] = player["guardians"].split("and")
+        player['guardians'] = str(player["guardians"])
 # saw Christopher Spagnesi post on slack for the int conversion
         if player["experience"] == "YES":
             player["experience"] = True
@@ -25,6 +28,8 @@ def clean_data():
         if player["experience"] == "NO":
             player["experience"] = False
             not_experienced.append(player)
+
+        player['guardians'] = str(player["guardians"])
 # looked on gdchoices43 github for help on experience on nonexperience
 
 
@@ -34,8 +39,9 @@ def team_balance():
     teams[2] = is_experienced[6:9] + not_experienced[6:9]
     # looked on gdchoices43 github for help on experience on team_balance
 
-clean_data()
-team_balance()
+if __name__ == '__main__':
+    clean_data()
+    team_balance()
 
 while True:
     print("*" * 82)
@@ -161,35 +167,35 @@ while True:
             print("\nNot a valid choice. Pick again.\n")
             continue
     elif choose.upper() == "C":
-        Worriers = teams[2]
+        Warriors = teams[2]
         team3 = []
         team3_guardians = []
         team3_height = []
-        height = [player["height"] for player in Worriers]
-        average_height_team1 = round(sum(height) / len(Worriers), 1)
+        height = [player["height"] for player in Warriors]
+        average_height_team1 = round(sum(height) / len(Warriors), 1)
         average_height_team1 = float(average_height_team1)
-        exp_player = [player["experience"] for player in Worriers if player["experience"] == True]
+        exp_player = [player["experience"] for player in Warriors if player["experience"] == True]
         exp_player = int(len(exp_player))
-        not_exp_player = [player["experience"] for player in Worriers if player["experience"] == False]
+        not_exp_player = [player["experience"] for player in Warriors if player["experience"] == False]
         not_exp_player = int(len(not_exp_player))
         # looked on gdchoices43 github to clear up how to average and experience vs non
-        print("\n \n:{**}_ Worriers Stats!_{**}:")
-        print("\nThere are {}  Worriers on the team".format(num_players))
-        print("The Worriers average height is {}".format(average_height_team1))
-        print("There are {} experienced  Worriers".format(exp_player))
-        print("There are {} non experienced  Worriers".format(exp_player))
+        print("\n \n:{**}_ Warriors Stats!_{**}:")
+        print("\nThere are {}  Warriors on the team".format(num_players))
+        print("The Warriors average height is {}".format(average_height_team1))
+        print("There are {} experienced  Warriors".format(exp_player))
+        print("There are {} non experienced  Warriors".format(exp_player))
         print("\n :{**}_Player Stats!_{**}:")
-        for player in Worriers:
+        for player in Warriors:
             name = player["name"]
             team3.append(str(name))
         print("\nPlayers Names:")
         print(", ".join(team3))
-        for player in Worriers:
+        for player in Warriors:
             guardians = player["guardians"]
             team3_guardians.append(str(guardians))
         print("\nPlayers Guardians:")
         print(", ".join(team3_guardians))
-        for player in Worriers:
+        for player in Warriors:
             height = player["height"]
             team3_height.append(str(height))
         print("\nHieght in inches:")
@@ -208,7 +214,3 @@ while True:
         print("\nNot a valid selection")
         continue
 
-
-if __name__ == '__main__':
-    clean_data()
-    team_balance()
