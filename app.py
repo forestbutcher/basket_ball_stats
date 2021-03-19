@@ -13,13 +13,12 @@ Panthers = []
 Bandits = []
 Warriors = []
 
-
 def clean_data():
     for player in players:
         height = player["height"].split()
         player["height"] = int(height[0])
         player['guardians'] = str(player["guardians"])
-        player['guardians'] = player["guardians"].split("and")
+        player['guardians'] = ", ".join(player["guardians"].split(" and "))
         player['guardians'] = str(player["guardians"])
 # saw Christopher Spagnesi post on slack for the int conversion
         if player["experience"] == "YES":
